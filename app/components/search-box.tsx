@@ -1,16 +1,16 @@
 import type { ChangeEvent } from "react";
 import { useState, useEffect } from "react";
 import { useDebouncedSearch } from "~/hooks/use-debounced-search";
-import { FormField } from "./form-field";
-
+ 
 type Props = {
+  label?: string;
   searchTerm?: string;
   placeholder?: string;
   onChange: (e: any) => void;
 };
 
 export const SearchBox = (props: Props) => {
-  const { placeholder = "", searchTerm = "", onChange } = props;
+  const { placeholder = "", searchTerm = "", label = "", onChange } = props;
 
   const [search, setSearch] = useState("");
   const { debouncedSearch } = useDebouncedSearch(onChange);
@@ -26,13 +26,17 @@ export const SearchBox = (props: Props) => {
   };
 
   return (
-    <FormField
-      label=""
-      type="search"
-      htmlFor="search"
-      value={search || ""}
-      placeholder={placeholder}
-      onChange={handleChange}
-    />
+    <div>
+      <label htmlFor="search" className="text-blue-600 font-semibold">
+        {label}
+      </label>
+      <input
+        type="search"
+        className="w-full p-2 rounded-xl my-2"
+        value={search || ""}
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
+    </div>
   );
 };

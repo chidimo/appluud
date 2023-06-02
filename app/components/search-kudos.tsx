@@ -1,5 +1,3 @@
-// app/components/search-bar.tsx
-
 import { useSearchParams } from "@remix-run/react";
 import { SearchBox } from "./search-box";
 import { SelectBox } from "./select-box";
@@ -9,7 +7,7 @@ export function SearchKudos() {
   let [searchParams, setSearchParams] = useSearchParams();
 
   return (
-    <div className={`w-full px-6 flex items-center gap-x-4`}>
+    <div className="flex ">
       <SearchBox
         searchTerm={searchParams.get("filter") ?? ""}
         placeholder="Search a message or name"

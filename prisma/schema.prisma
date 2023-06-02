@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // output   = "../generated/client"
 }
 
 datasource db {
@@ -11,8 +12,9 @@ datasource db {
 }
 
 type Profile {
-  firstName String
-  lastName  String
+  firstName  String
+  lastName   String
+  department Department? @default(MARKETING)
 }
 
 model User {

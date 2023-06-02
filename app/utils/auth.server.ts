@@ -32,7 +32,7 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-// app/utils/auth.server.ts
+
 export async function register(user: RegisterForm) {
   const exists = await prisma.user.count({ where: { email: user.email } });
   if (exists) {

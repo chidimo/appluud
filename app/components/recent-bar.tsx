@@ -10,7 +10,7 @@ export interface KudoWithRecipient extends Kudo {
 
 export function RecentBar({ kudos }: { kudos: KudoWithRecipient[] }) {
   return (
-    <div className="w-1/5 border-l-4 border-l-yellow-300 flex flex-col items-center">
+    <div className="w-1/5 border-l-2 border-l-gray-200 flex flex-col items-center">
       <h2 className="text-xl text-yellow-300 font-semibold my-6">
         Recent Kudos
       </h2>

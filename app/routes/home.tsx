@@ -1,15 +1,16 @@
 import { json, type LoaderFunction } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
 import { Layout } from "~/components/layout";
 import { UserPanel } from "~/components/user-panel";
-import { requireUserId } from "~/utils/auth.server";
+import { getUser, requireUserId } from "~/utils/auth.server";
 import { getFilteredKudos, getRecentKudos } from "~/utils/kudos.server";
 import { getOtherUsers } from "~/utils/user.server";
 import type { Kudo as TKudo, Profile, User, Prisma } from "@prisma/client";
 import { Kudo } from "~/components/kudo";
-import { SearchBar } from "~/components/search-bar";
 import { SearchKudos } from "~/components/search-kudos";
-import { KudoWithRecipient, RecentBar } from "~/components/recent-bar";
+import type { KudoWithRecipient } from "~/components/recent-bar";
+import { RecentBar } from "~/components/recent-bar";
+import { UserCircle } from "~/components/user-circle";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -56,12 +57,13 @@ export const loader: LoaderFunction = async ({ request }) => {
     };
   }
 
+  const user = await getUser(request);
   const recentKudos = await getRecentKudos();
   const userId = await requireUserId(request);
   const users: User[] = await getOtherUsers(userId);
   const kudos: Omit<TKudo, "createdAt" | "authorId" | "recipientId">[] =
     await getFilteredKudos(userId, sortOptions, textFilter);
-  return json({ users, kudos, recentKudos });
+  return json({ users, kudos, recentKudos, user });
 };
 
 interface KudoWithProfile extends TKudo {
@@ -71,20 +73,30 @@ interface KudoWithProfile extends TKudo {
 }
 
 type DataType = {
+  user: User;
   users: User[];
   kudos: KudoWithProfile[];
   recentKudos: KudoWithRecipient[];
 };
 
 export default function Home() {
-  const { users, kudos, recentKudos } = useLoaderData() as unknown as DataType;
+  const { users, kudos, recentKudos, user } =
+    useLoaderData() as unknown as DataType;
+  const navigate = useNavigate();
   return (
     <Layout>
       <Outlet />
       <div className="h-full flex">
         <UserPanel users={users} />
         <div className="flex-1 flex flex-col">
-          <SearchKudos />
+          <div className="w-full px-10 h-20 flex items-center justify-between gap-x- border-b-2 border-b-gray-200">
+            <SearchKudos />
+            <UserCircle
+              className="h-14 w-14 transition duration-300 ease-in-out hover:scale-110 hover:border-2 hover:border-gray-200"
+              profile={user.profile}
+              onClick={() => navigate("profile")}
+            />
+          </div>
           <div className="flex-1 flex">
             <div className="w-full p-10 flex flex-col gap-y-4">
               {kudos.map((kudo: KudoWithProfile) => (
