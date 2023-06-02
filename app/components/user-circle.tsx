@@ -1,12 +1,12 @@
 import type { Profile } from '@prisma/client'
 
-interface props {
+interface Props {
   profile: Profile
   className?: string
   onClick?: (...args: any) => any
 }
 
-export function UserCircle({ profile, onClick, className }: props) {
+export function UserCircle({ profile, onClick, className }: Props) {
   return (
     <div
       className={`${className} cursor-pointer bg-blue-700 rounded-full flex justify-center items-center`}

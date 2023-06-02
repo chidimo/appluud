@@ -9,7 +9,7 @@ import {
   validateEmail,
   validateName,
   validatePassword,
-} from "~/utils/validators..server";
+} from "~/utils/validators.server";
 import { getUser, login, register } from "~/utils/auth.server";
 import { useActionData } from "@remix-run/react";
 
@@ -136,7 +136,7 @@ export default function Login() {
         </button>
 
         <h2 className="text-5xl font-extrabold text-yellow-300">
-          Welcome to Apluud!
+          Welcome to Kudo!
         </h2>
         <p className="font-semibold text-slate-300">
           {action === "login"
