@@ -1,4 +1,13 @@
-# Welcome to Remix!
+# Kudos app
+
+## Links
+
+1. <https://www.prisma.io/blog/fullstack-remix-prisma-mongodb-4-l3MwEp4ZLIm2>
+1. <https://cloudinary.com/blog/guest_post/how-to-upload-images-to-cloudinary-with-remix-app>
+1. <https://dev.to/crypticai/uploading-files-in-remix-to-an-s3-compatible-service-35c9>
+
+
+## Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
 
