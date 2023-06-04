@@ -6,6 +6,12 @@
 1. <https://cloudinary.com/blog/guest_post/how-to-upload-images-to-cloudinary-with-remix-app>
 1. <https://dev.to/crypticai/uploading-files-in-remix-to-an-s3-compatible-service-35c9>
 
+## Vercel deployment
+
+Error about prisma generate during deployment. Just run the build command as 
+
+        prisma generate && npm run build:css && remix build
+
 
 ## Welcome to Remix!
 
